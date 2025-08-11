@@ -21,4 +21,13 @@ class Product extends Model
     {
         return $this->belongsTo(Category::class);
     }
+
+    /**
+     * Formatted price accessor: 12 990 ₽
+     */
+    public function getPriceFormattedAttribute(): string
+    {
+        $value = (int) $this->price;
+        return number_format($value, 0, ',', ' ') . ' ₽';
+    }
 }

@@ -17,4 +17,9 @@ class CategoryRepository
         $products = $category->products()->orderBy('name')->paginate($perPage);
         return [$category, $products];
     }
+
+    public function paginateProducts(Category $category, int $perPage = 6)
+    {
+        return $category->products()->orderBy('name')->paginate($perPage);
+    }
 }

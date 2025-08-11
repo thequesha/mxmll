@@ -15,9 +15,13 @@ use Illuminate\Support\Facades\Auth;
 */
 
 Route::get('/', function () {
-    return view('welcome');
+    return view('homepage');
 });
 
 Auth::routes();
 
 Route::get('/home', 'HomeController@index')->name('home');
+
+// Public catalog routes (slug-bound via models)
+Route::get('/catalog/{category}', 'CategoryController@show')->name('category.show');
+Route::get('/product/{product}', 'ProductController@show')->name('product.show');
