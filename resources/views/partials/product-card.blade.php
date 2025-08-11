@@ -1,9 +1,9 @@
 @php
     $imagePath = $product->image ?: null;
-    if ($imagePath && strpos($imagePath, 'products/') !== 0) {
-        $imagePath = 'products/' . ltrim($imagePath, '/');
-    }
-    $imgUrl = $imagePath ? \Illuminate\Support\Facades\Storage::url($imagePath) : 'https://via.placeholder.com/400x533?text=No+Image';
+    // if ($imagePath && strpos($imagePath, 'products/') !== 0) {
+    //     $imagePath = 'products/' . ltrim($imagePath, '/');
+    // }
+    $imgUrl = $imagePath ? asset($imagePath) : asset('placeholder.png');
 @endphp
 <div class="card h-100">
     <a href="{{ route('product.show', $product) }}" class="text-decoration-none text-body">
@@ -16,6 +16,7 @@
         </div>
     </a>
     <div class="card-footer bg-white border-0 pt-0 pb-3 px-3">
-        <button type="button" class="btn btn-sm btn-primary btn-block" aria-label="Добавить в корзину (не активно)" onclick="return false;">В корзину</button>
+        <button type="button" class="btn btn-sm btn-primary btn-block btn-add-to-cart"
+            aria-label="Добавить в корзину (не активно)">В корзину</button>
     </div>
 </div>

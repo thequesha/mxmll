@@ -22,17 +22,16 @@ use SleepingOwl\Admin\Navigation\Page;
 // AdminSection::addMenuPage(\App\User::class)
 
 return [
-    [
-        'title' => 'Dashboard',
-        'icon'  => 'fas fa-tachometer-alt',
-        'url'   => route('admin.dashboard'),
-    ],
 
-    [
-        'title' => 'Information',
-        'icon'  => 'fas fa-info-circle',
-        'url'   => route('admin.information'),
-    ],
+    (new Page(\App\Models\Category::class))
+        ->setTitle('Категории')
+        ->setPriority(200)
+        ->setIcon('fas fa-folder-open'),
+
+    (new Page(\App\Models\Product::class))
+        ->setTitle('Товары')
+        ->setPriority(210)
+        ->setIcon('fas fa-box'),
 
     // Examples
     // [
@@ -65,9 +64,9 @@ return [
     //                'title'    => 'Blog',
     //                'priority' => 100,
     //                'model'    => \App\Blog::class
-	//		      ));
+    //		      ));
     //
-	//		      $page->addPage(\App\Blog::class);
+    //		      $page->addPage(\App\Blog::class);
     //	      }),
     //
     //        // or

@@ -19,14 +19,19 @@ class CategoryObserver
     {
         if (empty($category->slug)) {
             $category->slug = $this->slugService->generateUniqueSlug($category->name, Category::class);
+        } else {
+            // Normalize provided slug and ensure uniqueness
+            $category->slug = $this->slugService->generateUniqueSlug($category->slug, Category::class);
         }
     }
 
     public function updating(Category $category): void
     {
-        // Do not regenerate if slug already exists. Only fill if blank.
+        // Do not regenerate from name if slug provided; normalize provided slug instead
         if (empty($category->slug)) {
             $category->slug = $this->slugService->generateUniqueSlug($category->name, Category::class, $category->id);
+        } else {
+            $category->slug = $this->slugService->generateUniqueSlug($category->slug, Category::class, $category->id);
         }
     }
 }
