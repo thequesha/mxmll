@@ -4,6 +4,7 @@ namespace App\Http\Sections;
 
 use App\Models\Category;
 use App\Models\Product;
+use Illuminate\Support\Facades\File;
 use SleepingOwl\Admin\Facades\Display as AdminDisplay;
 use SleepingOwl\Admin\Facades\TableColumn as AdminColumn;
 use SleepingOwl\Admin\Facades\Form as AdminForm;
@@ -59,8 +60,8 @@ class Products extends Section
                 ->setSaveCallback(function ($file, $path, $filename, array $settings) {
                     // Ensure target directory exists under public/
                     $publicPath = public_path($path);
-                    if (!\Illuminate\Support\Facades\File::exists($publicPath)) {
-                        \Illuminate\Support\Facades\File::makeDirectory($publicPath, 0775, true);
+                    if (!File::exists($publicPath)) {
+                        File::makeDirectory($publicPath, 0775, true);
                     }
 
                     $file->move($publicPath, $filename);
